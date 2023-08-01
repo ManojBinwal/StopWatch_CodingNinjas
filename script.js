@@ -1,67 +1,58 @@
-const time_el = document.querySelector('.watch .time');
-const start_btn = document.getElementById('start');
-const stop_btn = document.getElementById('stop');
-const reset_btn = document.getElementById('reset');
+// Get references to HTML elements
+const timeDisplayElement = document.querySelector('.watch .time');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
 
-let seconds = 0;
-let interval = null;
+// Initialize variables
+let totalSeconds = 0;
+let intervalId = null;
 
-// event listerners 
-start_btn.addEventListener('click',start);
-stop_btn.addEventListener('click',stop);
-reset_btn.addEventListener('click',reset);
+// Event listeners
+startButton.addEventListener('click', startTimer);
+stopButton.addEventListener('click', stopTimer);
+resetButton.addEventListener('click', resetTimer);
 
+// Timer function to update the time display
+function updateTimerDisplay() {
+    totalSeconds++;
 
+    // Format time
+    let hours = Math.floor(totalSeconds / 3600);
+    let minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+    let seconds = totalSeconds % 60;
 
+    // Add leading zeros for single-digit values
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
 
-//timer fucntion 
-
-//update the timer
-
-function timer() {
-    seconds++;
-
-    //format time
-
-    let hrs = Math.floor (seconds / 3600);
-    
-    let mins = Math.floor((seconds - (hrs * 3600))/60);
-
-    let secs = seconds % 60;
-
-    if (secs < 10 ) secs  =  '0' + secs;
-    if (mins < 10 ) mins  =  '0' + mins;
-    if (hrs < 10 ) hrs  =  '0' + hrs;
-   
-    time_el.innerHTML = `${hrs}:${mins}:${secs}`;
-
-
+    // Update the time display
+    timeDisplayElement.innerHTML = `${hours}:${minutes}:${seconds}`;
 }
 
-//start function 
-
-function start () {
-    if (interval) {
-        return
+// Start function to begin the timer
+function startTimer() {
+    // Check if the timer is already running
+    if (intervalId) {
+        return;
     }
 
-    interval = setInterval(timer,1000);
-
+    // Start the timer and update every second
+    intervalId = setInterval(updateTimerDisplay, 1000);
 }
 
-//stop function
+// Stop function to pause the timer
+function stopTimer() {
+    // Clear the interval to stop the timer
+    clearInterval(intervalId);
+    intervalId = null;
+}
 
-    function stop() {
-        clearInterval(interval);
-        interval = null;
-
-    }
-
-//reset function
-
-    function reset() {
-        stop();
-        seconds = 0;
-        time_el.innerHTML = '00:00:00';
-    }
-
+// Reset function to reset the timer to 00:00:00
+function resetTimer() {
+    // Stop the timer, reset the seconds, and update the display
+    stopTimer();
+    totalSeconds = 0;
+    timeDisplayElement.innerHTML = '00:00:00';
+}
