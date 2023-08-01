@@ -52,7 +52,7 @@ Prerequisites
 To use this stopwatch project, you need a web browser that supports modern JavaScript features.
 
 Installation
-You don't need to install anything to use this project. Simply download the code and open index.html in your web browser.
+You don't need to install anything to use this project. Simply download the code or clone the repository on your IDE. use go live extention to preview the project.
 
 bash
 Copy code
@@ -64,8 +64,8 @@ https://manojbinwal.github.io/StopWatch_CodingNinjas/
 
 
 Usage
-Open index.html in your web browser.
-You will see the stopwatch interface with the time displayed as 00:00:00.
+
 Click the "Start" button to start the stopwatch.
 Click the "Stop" button to pause the stopwatch at any point.
+Click the "Start"  button again to resume the stopwatch.
 Click the "Reset" button to set the stopwatch back to 00:00:00.
